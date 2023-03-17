@@ -1,0 +1,13 @@
+:root {
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body,
+#app {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
+}
