@@ -2,5 +2,6 @@ import { createApp } from 'vue';
 import '@/style.scss';
 import App from './App.vue';
 import router from '@/router';
+import { vMaska } from 'maska';
 
-createApp(App).use(router).mount('#app');
+createApp(App).directive('maska', vMaska).use(router).mount('#app');
