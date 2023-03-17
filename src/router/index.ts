@@ -1,8 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
-const routes = [
-  { path: '', component: () => import('@/views/Checkout.vue') },
-  { path: '/resume', component: () => import('@/views/Resume.vue') },
+// @ts-ignore <- ignore it
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    component: () => import('@/layouts/MainLayout.vue'),
+    children: [
+      { path: '/', component: () => import('@/views/Checkout.vue') },
+      { path: '/resume', component: () => import('@/views/Resume.vue') },
+    ],
+  },
+  {
+    path: '/:catchAll(.*)*',
+    component: () => import('@/views/ErrorNotFound.vue'),
+  },
+  ,
 ];
 export default createRouter({
   history: createWebHistory(),
