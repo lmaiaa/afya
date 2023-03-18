@@ -1,72 +1,121 @@
 <template>
-  <div class="field" v-for="offer in mock" :key="offer.id">
-    <div class="selecao">
-      <div class="desciptions">
-        <span>{{ offer.title }} | {{ offer.description }}</span>
+  <div class="container-checkout__offer__list">
+    <div
+      class="container-checkout__offer__list__offer"
+      v-for="offer in offers"
+      :key="offer.id"
+    >
+      <div class="container-checkout__offer__list__offer__descriptions">
         <span
-          >De R${{ offer.fullPrice }} | Por R${{
-            (offer.fullPrice - offer.discountAmmount)
-              .toFixed(2)
-              .split('.')
-              .join(',')
-          }}
-          <span>-{{ offer.discountPercentage * 100 }}%</span>
-        </span>
-        <span>
-          {{ offer.installments }}x de R${{
-            ((offer.fullPrice - offer.discountAmmount) / offer.installments)
-              .toFixed(2)
-              .split('.')
-              .join(',')
+          class="container-checkout__offer__list__offer__descriptions__title"
+          >{{ offer.title }} | {{ offer.description }}</span
+        >
+        <div
+          class="container-checkout__offer__list__offer__descriptions__box-price"
+        >
+          <span
+            class="container-checkout__offer__list__offer__descriptions__price"
+            >De
+            {{
+              moneyFormatter(offer.fullPrice, {
+                locale: 'pt-BR',
+                currency: 'BRL',
+              })
+            }}
+            | Por
+            {{
+              moneyFormatter(offer.fullPrice - offer.discountAmmount, {
+                locale: 'pt-BR',
+                currency: 'BRL',
+              })
+            }}
+          </span>
+          <span
+            class="container-checkout__offer__list__offer__descriptions__tag-discount"
+            >-{{ offer.discountPercentage * 100 }}%</span
+          >
+        </div>
+        <span
+          class="container-checkout__offer__list__offer__descriptions__price-installment"
+        >
+          {{ offer.installments }}x de
+          {{
+            moneyFormatter(
+              (offer.fullPrice - offer.discountAmmount) / offer.installments,
+              {
+                locale: 'pt-BR',
+                currency: 'BRL',
+              }
+            )
           }}/{{ offer.periodLabel }}
         </span>
       </div>
-      <input v-model="offerSelect" type="radio" :value="offer.id" />
+      <input v-model="offerIdSelected" type="radio" :value="offer.id" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useCheckout } from '@/stores/checkout.store';
+import { computed } from 'vue';
+import { moneyFormatter } from '@/utils/formatters.util';
 
-const mock = [
-  {
-    id: 32,
-    storeId: 'anual_parcelado_iugu',
-    title: 'Premium Anual',
-    description: 'Parcelado',
-    caption: '7 Dias Grátis',
-    fullPrice: 600,
-    discountAmmount: 60,
-    discountPercentage: 0.1,
-    periodLabel: 'mês',
-    period: 'annually',
-    discountCouponCode: null,
-    order: 1,
-    priority: 1,
-    gateway: 'iugu',
-    splittable: true,
-    installments: 12,
-    acceptsCoupon: true,
+const store = useCheckout();
+
+const offers = computed(() => store.offer);
+const offerIdSelected = computed({
+  get() {
+    return store.offerSelected?.id;
   },
-  {
-    id: 33,
-    storeId: 'anual_a_vista_iugu',
-    title: 'Premium Anual',
-    description: 'À Vista',
-    caption: '7 Dias Grátis',
-    fullPrice: 7200,
-    discountAmmount: 720,
-    discountPercentage: 0.1,
-    periodLabel: 'ano',
-    period: 'annually',
-    discountCouponCode: null,
-    order: 2,
-    priority: 2,
-    gateway: 'iugu',
-    splittable: false,
-    installments: 1,
-    acceptsCoupon: true,
+  set(val) {
+    return store.selectOffer(
+      offers.value?.find((offer) => offer.id === val) ?? null
+    );
   },
-];
-const offerSelect = ref(mock[0].id);
+});
 </script>
+<style lang="scss" scoped>
+.container-checkout__offer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 330px;
+  &__offer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #191847;
+    padding: 20px;
+    border-radius: 15px;
+
+    &__descriptions {
+      display: flex;
+      flex-direction: column;
+      &__title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #191847;
+      }
+      &__box-price {
+        display: flex;
+        gap: 12px;
+      }
+      &__price {
+        font-size: 12px;
+        color: #191847;
+      }
+      &__tag-discount {
+        background-color: #f5850b;
+        border-radius: 9px;
+        width: 40px;
+        font-size: 10px;
+        color: #ffffff;
+        text-align: center;
+      }
+      &__price-installment {
+        color: #f5850b;
+        font-size: 10px;
+      }
+    }
+  }
+}
+</style>
