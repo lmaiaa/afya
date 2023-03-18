@@ -12,3 +12,7 @@ export function createSubscription(subscription: SubscriptionPayload) {
     subscription
   );
 }
+
+export function getSubscription() {
+  return api.get<never, SubscriptionResponse>(`${subscriptionURL}`);
+}

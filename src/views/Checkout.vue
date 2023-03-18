@@ -20,16 +20,20 @@
       </div>
       <OfferSelect />
     </div>
+    <Loading v-if="loading" />
   </div>
 </template>
 <script setup lang="ts">
 import FormFieldsPayment from '@/components/FormFieldsPayment.vue';
+import Loading from '@/components/Loading.vue';
 import OfferSelect from '@/components/OfferSelect.vue';
+import { useAsyncAction } from '@/composables/use-async';
 import { useCheckout } from '@/stores/checkout.store';
 import { onMounted } from 'vue';
 
 const store = useCheckout();
-onMounted(async () => await store.fetchOffer());
+const { start: fetchOffer, loading } = useAsyncAction(() => store.fetchOffer());
+onMounted(async () => await fetchOffer());
 </script>
 <style lang="scss" scoped>
 .container-checkout {

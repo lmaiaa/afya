@@ -1,5 +1,9 @@
 <template>
-  <form class="container-checkout__fields__form">
+  <form
+    ref="formCheckout"
+    class="container-checkout__fields__form"
+    @submit.prevent="subscribe($event)"
+  >
     <div class="container-checkout__fields__form__card-number">
       <label class="label">Número do cartão</label>
       <div class="control">
@@ -85,7 +89,7 @@
       <div class="control">
         <div class="select">
           <select v-model="form.installments.value">
-            <option disabled selected hidden value="">Selecionar</option>
+            <option disabled selected hidden :value="0">Selecionar</option>
             <option
               v-for="option in installmentsByOffers"
               v-bind:value="option.value"
@@ -102,13 +106,24 @@
       </div>
     </div>
   </form>
+  <Loading v-if="loading" />
 </template>
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 import { useCheckout } from '@/stores/checkout.store';
 import { moneyFormatter } from '@/utils/formatters.util';
+import { SubscriptionPayload } from '@/types/subscription.types';
+import { MaskaDetail } from 'maska';
+import { useRouter } from 'vue-router';
+import { useAsyncAction } from '@/composables/use-async';
+import Loading from './Loading.vue';
 
 const store = useCheckout();
+const router = useRouter();
+const { start: sendSubscription, loading } = useAsyncAction(
+  (partialPayload: Omit<SubscriptionPayload, 'offerId'>) =>
+    store.sendSubscription(partialPayload)
+);
 
 const installmentsByOffers = computed(() => {
   const instalments = [];
@@ -136,8 +151,12 @@ const installmentsByOffers = computed(() => {
 const form = reactive({
   cardNumber: {
     mask: '#### #### #### ####',
+    onMaska: (detail: MaskaDetail) =>
+      (form.cardNumber.unmasked = detail.unmasked),
+    unmasked: '',
     value: '',
   },
+
   creditCardExpirationDate: {
     mask: '##/##',
     value: '',
@@ -151,15 +170,34 @@ const form = reactive({
   },
   cpf: {
     mask: '###.###.###-##',
+    onMaska: (detail: MaskaDetail) => (form.cpf.unmasked = detail.unmasked),
+    unmasked: '',
     value: '',
   },
   discountCouponCode: {
     value: '',
   },
   installments: {
-    value: '',
+    value: 0,
   },
 });
+
+async function subscribe(e: Event) {
+  e.preventDefault();
+  const partialPayload: Omit<SubscriptionPayload, 'offerId'> = {
+    creditCardNumber: form.cardNumber.unmasked,
+    creditCardExpirationDate: form.creditCardExpirationDate.value,
+    creditCardCVV: form.creditCardCVV.value,
+    creditCardHolder: form.fullName.value,
+    creditCardCPF: form.cpf.unmasked,
+    couponCode: form.discountCouponCode.value,
+    gateway: 'iugu',
+    userId: 1,
+    installments: form.installments.value,
+  };
+  const response = await sendSubscription(partialPayload);
+  if (response) router.push(`/resume/${response.id}`);
+}
 </script>
 <style lang="scss" scoped>
 .container-checkout__fields__form {
