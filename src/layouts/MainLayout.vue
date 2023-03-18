@@ -27,11 +27,13 @@ import { mdiChevronLeft } from '@mdi/js';
 <style lang="scss">
 .container-layout {
   width: 100%;
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 10fr;
   &__header {
-    padding: 16px;
+    width: 100%;
+    background-color: #fff;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
@@ -42,6 +44,9 @@ import { mdiChevronLeft } from '@mdi/js';
     &__logo {
       justify-self: center;
     }
+  }
+  &__main {
+    overflow-x: auto;
   }
 }
 </style>
