@@ -1,13 +1,74 @@
-:root {
+:root,
+* {
   font-family: 'DM Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  margin: 0;
 }
 
-body,
-#app {
+body {
   margin: 0;
-  display: flex;
-  min-height: 100vh;
-  min-width: 100vw;
+  height: 100vh;
+  width: 100vw;
+}
+
+#app {
+  width: 100%;
+}
+input,
+select {
+  width: 100%;
+  height: 36px;
+  border: none;
+  border-bottom: 1px solid #f4f3f6;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #191847;
+  &::placeholder {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #b0b0b0;
+  }
+}
+input[type='radio'] {
+  height: 16px;
+  width: auto;
+}
+select {
+  color: #b0b0b0;
+  option {
+    color: #191847;
+  }
+}
+
+label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #727272;
+}
+button {
+  background-color: #191847;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 25px;
+  height: 50px;
+  width: 100%;
+  font-size: 14px;
+  border: none;
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  &:hover:not(:focus) {
+    background-color: #0e0e28;
+  }
+}
+
+h4 {
+  font-size: 20px;
 }
