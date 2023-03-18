@@ -4,5 +4,5 @@ import api from '@/utils/api.instance';
 const offerURL = '/offer';
 
 export function getOffer() {
-  return api.get<never, OfferResponse>(`${offerURL}`);
+  return api.get<never, OfferResponse[]>(`${offerURL}`);
 }

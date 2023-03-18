@@ -3,7 +3,7 @@ const errorMessages: Record<string, string> = {
   network_error: 'Erro de conexão',
 };
 const api = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
 });
 const onError = (err: unknown) => {
   if (axios.isAxiosError(err) && err.response?.data) {
