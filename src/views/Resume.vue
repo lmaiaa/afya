@@ -65,7 +65,7 @@ import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiCheckCircleOutline, mdiStarOutline } from '@mdi/js';
 import { useCheckout } from '@/stores/checkout.store';
 import { onMounted, computed } from 'vue';
-import Loading from '@/components/Loading.vue';
+import Loading from '@/components/Shared/Loading.vue';
 import { moneyFormatter } from '@/utils/formatters.util';
 import { Mask } from 'maska';
 

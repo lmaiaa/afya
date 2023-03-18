@@ -116,7 +116,7 @@ import { SubscriptionPayload } from '@/types/subscription.types';
 import { MaskaDetail } from 'maska';
 import { useRouter } from 'vue-router';
 import { useAsyncAction } from '@/composables/use-async';
-import Loading from './Loading.vue';
+import Loading from '../Shared/Loading.vue';
 
 const store = useCheckout();
 const router = useRouter();
