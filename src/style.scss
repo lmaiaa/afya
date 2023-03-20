@@ -63,6 +63,7 @@ button {
   &:disabled {
     cursor: not-allowed;
     pointer-events: none;
+    background-color: #4d4d68;
   }
   &:hover:not(:focus) {
     background-color: #0e0e28;

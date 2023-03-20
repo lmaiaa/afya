@@ -4,6 +4,7 @@
       class="container-checkout__offer__list__offer"
       v-for="offer in offers"
       :key="offer.id"
+      @click="offerIdSelected = offer.id"
     >
       <div class="container-checkout__offer__list__offer__descriptions">
         <span
@@ -86,6 +87,7 @@ const offerIdSelected = computed({
     border: 1px solid #191847;
     padding: 20px;
     border-radius: 15px;
+    cursor: pointer;
 
     &__descriptions {
       display: flex;

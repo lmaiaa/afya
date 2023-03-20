@@ -24,9 +24,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import FormFieldsPayment from '@/components/FormFieldsPayment.vue';
-import Loading from '@/components/Loading.vue';
-import OfferSelect from '@/components/OfferSelect.vue';
+import FormFieldsPayment from '@/components/Checkout/FormFieldsPayment.vue';
+import Loading from '@/components/Shared/Loading.vue';
+import OfferSelect from '@/components/Checkout/OfferSelect.vue';
 import { useAsyncAction } from '@/composables/use-async';
 import { useCheckout } from '@/stores/checkout.store';
 import { onMounted } from 'vue';
@@ -56,6 +56,7 @@ onMounted(async () => await fetchOffer());
     flex-direction: column;
     min-width: 350px;
     justify-self: center;
+    padding: 0 24px;
     &__title,
     &__subtitle {
       margin-bottom: 8px;
