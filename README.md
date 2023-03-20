@@ -1,18 +1,62 @@
-# Vue 3 + TypeScript + Vite
+# Desafio Afya
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Sobre o Projeto
 
-## Recommended IDE Setup
+O projeto é a simulação de um checkout de pagamento de planos. para isso foi utilizado uma API Mock fornecida pela Afya.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+O projeto foi hospedado com netlify e pode ser acessado por [aqui](https://afya.netlify.app/).
 
-## Type Support For `.vue` Imports in TS
+**Tecnologias**:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- **VueJs** - na versão 3 (Framework JavaScript).
+- **Typescript**
+- **[Netfly](https://www.netlify.com/)** - para hospedagem do front-end no Netfly.
+- **[Vite](https://vitejs.dev/)**
+- **[Pinia](https://pinia.vuejs.org/)**
+- **Github Actions** - Implementado ferramenta de CI para deploy automático no Netfly.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Requisitos necessários
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+É necessário a instalação do NodeJs 14.X e GIT para inicialização do projeto.
+
+- **Instalação do NodeJs:** [Acesse aqui](https://nodejs.org/en/download/) e realize o download do NodeJs 14.X
+- **Instalação do GIT:** Realize o download [aqui](https://git-scm.com/downloads) e realize a instalção.
+
+Realizado as configurações vamos para a próxima etapa.
+
+## Incializando o projeto
+
+Acesse o [repositório](https://github.com/lmaiaa/afya) do meu desafio
+
+Execute o comando
+
+```
+git clone https://github.com/lmaiaa/afya
+```
+
+Acesse a pasta clonada e instale as dependências
+
+```
+cd afya
+npm install
+
+```
+
+Após isso o projeto está pronto para ser inicializado.
+Para inicializar do front-end execute o comando:
+
+```
+npm run dev
+```
+
+## Projeto inicializado
+
+Ao inicializar o projeto:
+
+- O front-end pode ser acessado em: **http://localhost:5173**
+
+## Para rodar os testes unitários
+
+```
+npm run test:unit
+```
