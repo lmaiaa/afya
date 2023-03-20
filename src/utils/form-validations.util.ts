@@ -1,6 +1,6 @@
 const validateDateExpire = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
 
-export function required(label: string) {
+export function isRequired(label: string) {
   return (v: string) => !!v || `Campo ${label} é obrigatório`;
 }
 
@@ -18,7 +18,7 @@ export function validateLengthAndRequired(
   value: string
 ) {
   const errorMessages = [];
-  const requiredValidationPassed = required(label)(value);
+  const requiredValidationPassed = isRequired(label)(value);
   const minCharValidationPassed = exactChars(length)(value);
   if (typeof requiredValidationPassed === 'string')
     errorMessages.push(requiredValidationPassed);

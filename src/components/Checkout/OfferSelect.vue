@@ -1,9 +1,9 @@
 <template>
   <div class="container-checkout__offer__list">
     <div
-      class="container-checkout__offer__list__offer"
       v-for="offer in offers"
       :key="offer.id"
+      class="container-checkout__offer__list__offer"
       @click="offerIdSelected = offer.id"
     >
       <div class="container-checkout__offer__list__offer__descriptions">

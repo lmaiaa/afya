@@ -8,7 +8,7 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test:unit": "vitest --environment jsdom --root src/",
-    "deploy": "node scripts/gh-pages-deploy.cjs"
+    "lint:script": "eslint --ext .ts,vue  --ignore-path .gitignore . "
   },
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
@@ -22,20 +22,35 @@
   "devDependencies": {
     "@pinia/testing": "0.0.15",
     "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "@vitejs/plugin-vue": "^4.1.0",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
     "@vue/test-utils": "^2.3.1",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.9.0",
     "execa": "^7.1.1",
+    "husky": "^8.0.3",
     "jsdom": "^21.1.1",
-    "prettier": "2.8.5",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.5",
     "sass": "^1.59.3",
     "start-server-and-test": "^2.0.0",
-    "typescript": "^4.9.3",
+    "typescript": "^4.9.5",
     "vite": "^4.2.0",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^0.29.5",
     "vue-tsc": "^1.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,vue}": "eslint --fix"
   }
 }

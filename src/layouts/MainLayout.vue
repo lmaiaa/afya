@@ -5,8 +5,8 @@
         type="mdi"
         :path="mdiChevronLeft"
         class="container-layout__header__icon-back"
-        @click="$route.path !== '/' ? $router.back() : null"
         style="cursor: pointer"
+        @click="$route.path !== '/' ? $router.back() : null"
       ></svg-icon>
       <img
         src="@/assets/logo.png"
