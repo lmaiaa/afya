@@ -1,6 +1,6 @@
 <template>
   <label>{{ props.label }}</label>
-  <input v-model="value" v-maska:[mask-options] type="text" v-bind="$attrs" />
+  <input v-model="value" v-maska:[maskOptions] type="text" v-bind="$attrs" />
   <span v-if="messageError" class="message-error">{{ messageError }}</span>
 </template>
 <script setup lang="ts">
