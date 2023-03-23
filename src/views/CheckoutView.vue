@@ -56,7 +56,7 @@
     &__offer {
       display: flex;
       flex-direction: column;
-      min-width: 350px;
+      min-width: 250px;
       justify-self: center;
       padding: 0 24px;
       &__title,

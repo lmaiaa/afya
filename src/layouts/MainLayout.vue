@@ -22,33 +22,33 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiChevronLeft } from '@mdi/js';
+  import { RouterView } from 'vue-router'
+  import SvgIcon from '@jamescoyle/vue-icon'
+  import { mdiChevronLeft } from '@mdi/js'
 </script>
 <style lang="scss">
-.container-layout {
-  width: 100%;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 10fr;
-  &__header {
+  .container-layout {
     width: 100%;
-    background-color: #fff;
+    height: 100vh;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-    align-items: center;
-    &__icon-back {
-      margin-left: 24px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr;
+    &__header {
+      width: 100%;
+      background-color: #fff;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      align-items: center;
+      &__icon-back {
+        margin-left: 24px;
+      }
+      &__logo {
+        justify-self: center;
+      }
     }
-    &__logo {
-      justify-self: center;
+    &__main {
+      overflow-x: hidden;
     }
   }
-  &__main {
-    overflow-x: auto;
-  }
-}
 </style>
